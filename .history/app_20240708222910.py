@@ -56,35 +56,7 @@ def read_products():
         logging.error("Error reading products: %s", e)
         messagebox.showerror("Error", str(e))
 
-def update_product():
-    try:
-        product_id = entry_product_id.get()
-        name = entry_name.get()
-        description = entry_description.get()
-        price = entry_price.get()
-        stock_quantity = entry_stock_quantity.get()
-        category_id = entry_category_id.get()
-        
-        cursor.execute("UPDATE Products SET name=%s, description=%s, price=%s, stock_quantity=%s, category_id=%s WHERE product_id=%s",
-                       (name, description, price, stock_quantity, category_id, product_id))
-        conn.commit()
-        messagebox.showinfo("Success", "Product updated successfully!")
-    except Exception as e:
-        conn.rollback()
-        logging.error("Error updating product: %s", e)
-        messagebox.showerror("Error", str(e))
 
-def delete_product():
-    try:
-        product_id = entry_product_id.get()
-        
-        cursor.execute("DELETE FROM Products WHERE product_id=%s", (product_id,))
-        conn.commit()
-        messagebox.showinfo("Success", "Product deleted successfully!")
-    except Exception as e:
-        conn.rollback()
-        logging.error("Error deleting product: %s", e)
-        messagebox.showerror("Error", str(e))
 
 
 # Pre-defined SQL queries
@@ -148,8 +120,6 @@ entry_category_id.grid(row=5, column=1)
 # Buttons for CRUD operations
 tk.Button(root, text="Create", command=create_product).grid(row=6, column=0)
 tk.Button(root, text="Read", command=read_products).grid(row=6, column=1)
-tk.Button(root, text="Update", command=update_product).grid(row=6, column=2)
-tk.Button(root, text="Delete", command=delete_product).grid(row=6, column=3)
 # Listbox for displaying products
 listbox_products = tk.Listbox(root)
 listbox_products.grid(row=7, column=0, columnspan=4)

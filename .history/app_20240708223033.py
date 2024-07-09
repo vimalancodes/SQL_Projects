@@ -55,36 +55,7 @@ def read_products():
     except Exception as e:
         logging.error("Error reading products: %s", e)
         messagebox.showerror("Error", str(e))
-
-def update_product():
-    try:
-        product_id = entry_product_id.get()
-        name = entry_name.get()
-        description = entry_description.get()
-        price = entry_price.get()
-        stock_quantity = entry_stock_quantity.get()
-        category_id = entry_category_id.get()
         
-        cursor.execute("UPDATE Products SET name=%s, description=%s, price=%s, stock_quantity=%s, category_id=%s WHERE product_id=%s",
-                       (name, description, price, stock_quantity, category_id, product_id))
-        conn.commit()
-        messagebox.showinfo("Success", "Product updated successfully!")
-    except Exception as e:
-        conn.rollback()
-        logging.error("Error updating product: %s", e)
-        messagebox.showerror("Error", str(e))
-
-def delete_product():
-    try:
-        product_id = entry_product_id.get()
-        
-        cursor.execute("DELETE FROM Products WHERE product_id=%s", (product_id,))
-        conn.commit()
-        messagebox.showinfo("Success", "Product deleted successfully!")
-    except Exception as e:
-        conn.rollback()
-        logging.error("Error deleting product: %s", e)
-        messagebox.showerror("Error", str(e))
 
 
 # Pre-defined SQL queries
