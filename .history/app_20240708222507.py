@@ -56,36 +56,6 @@ def read_products():
         logging.error("Error reading products: %s", e)
         messagebox.showerror("Error", str(e))
 
-# Pre-defined SQL queries
-def join_query():
-    try:
-        cursor.execute("""
-        SELECT p.name, c.category_name 
-        FROM Products p
-        JOIN Categories c ON p.category_id = c.category_id
-        """)
-        rows = cursor.fetchall()
-        listbox_results.delete(0, tk.END)
-        for row in rows:
-            listbox_results.insert(tk.END, row)
-    except Exception as e:
-        logging.error("Error executing join query: %s", e)
-        messagebox.showerror("Error", str(e))
-
-def subquery():
-    try:
-        cursor.execute("""
-        SELECT * FROM Products WHERE price > (
-            SELECT AVG(price) FROM Products
-        )
-        """)
-        rows = cursor.fetchall()
-        listbox_results.delete(0, tk.END)
-        for row in rows:
-            listbox_results.insert(tk.END, row)
-    except Exception as e:
-        logging.error("Error executing subquery: %s", e)
-        messagebox.showerror("Error", str(e))
 
 
 # GUI setup
@@ -117,14 +87,6 @@ entry_category_id.grid(row=5, column=1)
 # Buttons for CRUD operations
 tk.Button(root, text="Create", command=create_product).grid(row=6, column=0)
 tk.Button(root, text="Read", command=read_products).grid(row=6, column=1)
-
-# Buttons for pre-defined SQL queries
-tk.Button(root, text="Join Query", command=join_query).grid(row=8, column=0)
-tk.Button(root, text="Subquery", command=subquery).grid(row=8, column=1)
-
-# Listbox for displaying query results
-listbox_results = tk.Listbox(root)
-listbox_results.grid(row=9, column=0, columnspan=4)
 
 # Run the application
 root.mainloop()
