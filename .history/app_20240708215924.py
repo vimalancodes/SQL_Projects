@@ -57,6 +57,7 @@ def read_products():
         messagebox.showerror("Error", str(e))
 
 
+
 # GUI setup
 root = tk.Tk()
 root.title("Product Inventory Management")
@@ -86,6 +87,20 @@ entry_category_id.grid(row=5, column=1)
 # Buttons for CRUD operations
 tk.Button(root, text="Create", command=create_product).grid(row=6, column=0)
 tk.Button(root, text="Read", command=read_products).grid(row=6, column=1)
+tk.Button(root, text="Update", command=update_product).grid(row=6, column=2)
+tk.Button(root, text="Delete", command=delete_product).grid(row=6, column=3)
+
+# Listbox for displaying products
+listbox_products = tk.Listbox(root)
+listbox_products.grid(row=7, column=0, columnspan=4)
+
+# Buttons for pre-defined SQL queries
+tk.Button(root, text="Join Query", command=join_query).grid(row=8, column=0)
+tk.Button(root, text="Subquery", command=subquery).grid(row=8, column=1)
+
+# Listbox for displaying query results
+listbox_results = tk.Listbox(root)
+listbox_results.grid(row=9, column=0, columnspan=4)
 
 # Run the application
 root.mainloop()

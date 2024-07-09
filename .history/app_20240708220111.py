@@ -87,6 +87,7 @@ entry_category_id.grid(row=5, column=1)
 tk.Button(root, text="Create", command=create_product).grid(row=6, column=0)
 tk.Button(root, text="Read", command=read_products).grid(row=6, column=1)
 
+
 # Run the application
 root.mainloop()
 
